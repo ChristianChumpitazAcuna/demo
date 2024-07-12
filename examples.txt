@@ -1,0 +1,10 @@
+sdk list java
+sdk install java [version]  21.0.2-open
+
+sdk list maven
+sdk install maven [version]
+
+npm show @angular/cli dist-tags
+npm install -g @angular/cli@17.3.8
+
+npx -p @angular/cli@16 ng new nombre-proyecto
