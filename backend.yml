@@ -1,0 +1,125 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-principal
+  namespace: 07christianchumpitaz
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-principal
+  template:
+    metadata:
+      labels:
+        app: backend-principal
+    spec:
+      containers:
+        - name: backend-principal
+          image: christianca/ms-principal:v4
+          ports:
+            - containerPort: 8090
+          resources:
+            requests:
+              cpu: 125m
+              memory: 128Mi
+            limits:
+              cpu: 300m
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service-principal
+  namespace: 07christianchumpitaz
+spec:
+  selector:
+    app: backend-principal
+  ports:
+    - protocol: TCP
+      port: 8090
+      targetPort: 8090
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-student
+  namespace: 07christianchumpitaz
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-student
+  template:
+    metadata:
+      labels:
+        app: backend-student
+    spec:
+      containers:
+        - name: backend-student
+          image: christianca/ms-student:v2
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 125m
+              memory: 128Mi
+            limits:
+              cpu: 300m
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service-student
+  namespace: 07christianchumpitaz
+spec:
+  selector:
+    app: backend-student
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-didactic-unit
+  namespace: 07christianchumpitaz
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-didactic-unit
+  template:
+    metadata:
+      labels:
+        app: backend-didactic-unit
+    spec:
+      containers:
+        - name: backend-didactic-unit
+          image: christianca/ms-didactic-unit:v1
+          ports:
+            - containerPort: 8089
+          resources:
+            requests:
+              cpu: 125m
+              memory: 128Mi
+            limits:
+              cpu: 300m
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service-diactic-unit
+  namespace: 07christianchumpitaz
+spec:
+  selector:
+    app: backend-didactic-unit
+  ports:
+    - protocol: TCP
+      port: 8089
+      targetPort: 8089
