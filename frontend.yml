@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: christianca/vg-ms-profile_fe:v2
+          image: christianca/ms-enrollmen-detail-fe:v1
           ports:
             - containerPort: 4200
           resources:
