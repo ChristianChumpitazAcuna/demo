@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
-  namespace: 07christianchumpitaz
+  namespace: christian
 spec:
   replicas: 1
   selector:
@@ -16,22 +16,22 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: christianca/ms-enrollmen-detail-fe:v1
+          image: christianca/new-frontend:v1
           ports:
             - containerPort: 4200
           resources:
             requests:
               cpu: 125m
-              memory: 128Mi
+              memory: 2Gi
             limits:
               cpu: 300m
-              memory: 256Mi
+              memory: 4Gi
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: frontend-service
-  namespace: 07christianchumpitaz
+  namespace: christian
 spec:
   selector:
     app: frontend
