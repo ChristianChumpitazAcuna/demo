@@ -1,0 +1,40 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backend-ingress
+  namespace: christian
+  annotations:
+    kubernetes.io/ingress.class: gce
+    kubernetes.io/ingress.allow-http: "true"
+    # Configuración CORS
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, PUT, POST, DELETE, PATCH, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization"
+    nginx.ingress.kubernetes.io/cors-expose-headers: "Content-Length,Content-Range"
+    nginx.ingress.kubernetes.io/cors-max-age: "1728000"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /principal
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-service-principal
+                port:
+                  number: 8090
+          - path: /student
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-service-student
+                port:
+                  number: 8080
+          - path: /didactic-unit
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-service-diactic-unit
+                port:
+                  number: 8089
